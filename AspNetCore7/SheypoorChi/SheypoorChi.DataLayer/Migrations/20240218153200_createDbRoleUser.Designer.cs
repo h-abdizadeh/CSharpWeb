@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SheypoorChi.DataLayer.Context;
 
@@ -11,9 +12,11 @@ using SheypoorChi.DataLayer.Context;
 namespace SheypoorChi.DataLayer.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240218153200_createDbRoleUser")]
+    partial class createDbRoleUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,66 +24,6 @@ namespace SheypoorChi.DataLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("SheypoorChi.DataLayer.Models.Group", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("GroupName")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("Img")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("NotShow")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Groups");
-                });
-
-            modelBuilder.Entity("SheypoorChi.DataLayer.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Img")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("NotShow")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SubmitDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
-
-                    b.ToTable("Products");
-                });
 
             modelBuilder.Entity("SheypoorChi.DataLayer.Models.Role", b =>
                 {
@@ -103,7 +46,7 @@ namespace SheypoorChi.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2d3139f7-af19-4c32-8686-808bc60494e0"),
+                            Id = new Guid("56e14e83-32b2-4f9b-a30e-2cd884512e8c"),
                             RoleName = "admin",
                             RoleTitle = "مدیر"
                         });
@@ -137,23 +80,12 @@ namespace SheypoorChi.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a25e2b1f-c791-42f2-a208-f6fffcbff1d0"),
+                            Id = new Guid("3a15f391-9804-46fb-b70b-7f605e4642e3"),
                             IsActive = true,
-                            RoleId = new Guid("2d3139f7-af19-4c32-8686-808bc60494e0"),
+                            RoleId = new Guid("56e14e83-32b2-4f9b-a30e-2cd884512e8c"),
                             UserName = "09112223344",
                             UserPassword = "JfnnlDI7RTiF9RgfG2JNCw=="
                         });
-                });
-
-            modelBuilder.Entity("SheypoorChi.DataLayer.Models.Product", b =>
-                {
-                    b.HasOne("SheypoorChi.DataLayer.Models.Group", "Group")
-                        .WithMany("Products")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Group");
                 });
 
             modelBuilder.Entity("SheypoorChi.DataLayer.Models.User", b =>
@@ -165,11 +97,6 @@ namespace SheypoorChi.DataLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("SheypoorChi.DataLayer.Models.Group", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("SheypoorChi.DataLayer.Models.Role", b =>

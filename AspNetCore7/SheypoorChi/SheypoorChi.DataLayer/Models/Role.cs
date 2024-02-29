@@ -17,4 +17,8 @@ public class Role
     [Display(Name = "توضیح نقش", Prompt = "توضیح نقش")]
     [MaxLength(15, ErrorMessage = "نمیتواند بیش از 15 کاراکتر باشد")]
     public string? RoleTitle { get; set; }//fa
+
+    //ICollection === List, IEnumerable, ...
+    //Role -> User : n
+    virtual public ICollection<User> Users { get; set; }
 }
