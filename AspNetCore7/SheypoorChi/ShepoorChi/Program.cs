@@ -1,6 +1,10 @@
+using SheypoorChi.DataLayer.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+builder.Services.AddScoped<DatabaseContext, DatabaseContext>();
 
 var app = builder.Build();
 
@@ -19,7 +23,7 @@ app.UseEndpoints(endpoints =>
         name: "default",
         pattern: "{controller=home}/{action=index}/{id?}");
 
-    
+
 });
 
 app.Run();
