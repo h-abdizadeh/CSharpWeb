@@ -50,7 +50,7 @@ namespace ShepoorChi.Areas.Admin.Controllers
         // GET: Admin/Groups/Create
         public IActionResult Create()
         {
-            return View();
+            return View(;
         }
 
         // POST: Admin/Groups/Create

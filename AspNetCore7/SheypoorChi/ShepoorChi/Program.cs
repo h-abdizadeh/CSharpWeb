@@ -1,3 +1,5 @@
+using SheypoorChi.Core.Interface;
+using SheypoorChi.Core.Service;
 using SheypoorChi.DataLayer.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +7,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 builder.Services.AddScoped<DatabaseContext, DatabaseContext>();
+builder.Services.AddScoped<IAdmin, AdminService>();
 
 var app = builder.Build();
 
