@@ -19,8 +19,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SheypoorChi.Core\SheypoorChi.Core.csproj" />
-  </ItemGroup>
-
 </Project>

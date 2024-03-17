@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SheypoorChi.DataLayer.Models;
 
-using SheypoorChi.Core.Classes;
+//using SheypoorChi.Core.Classes;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace SheypoorChi.DataLayer.Context;
 
@@ -41,7 +43,7 @@ public class DatabaseContext : DbContext
             Id = Guid.NewGuid(),
             RoleId = adminRole.Id,
             UserName = "09112223344",
-            UserPassword = await new Security().GetHash("123456789")
+            UserPassword = await GetHash("123456789")
         };
         modelBuilder.Entity<User>().HasData(user);
 
@@ -55,5 +57,16 @@ public class DatabaseContext : DbContext
         //};
 
         //modelBuilder.Entity<Group>().HasData(groups);
+    }
+
+    public async Task<string> GetHash(string str)
+    {
+        MD5 md5 = MD5.Create();
+        byte[] baseInput = ASCIIEncoding.Default.GetBytes(str);
+        byte[] hashInput = md5.ComputeHash(baseInput);
+
+        var hashStr = Convert.ToBase64String(hashInput);
+
+        return await Task.FromResult(hashStr);
     }
 }
