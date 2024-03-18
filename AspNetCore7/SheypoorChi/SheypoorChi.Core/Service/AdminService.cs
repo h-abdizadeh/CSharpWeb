@@ -18,7 +18,16 @@ public class AdminService : IAdmin
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+        if (_context is not null)//!=
+        {
+            _context.Dispose();
+        }
+    }
+
+    public async Task<List<Group>> GetGroups()
+    {
+        var groups = await _context.Groups.ToListAsync();
+        return groups;
     }
 
     public async Task<List<Product>> GetProducts()
