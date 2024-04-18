@@ -32,17 +32,23 @@ public class ProductsController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(Product product)
+    public async Task<IActionResult> Create(Product product, IFormFile imgFile)
     {
-        if (ModelState.IsValid)
+        if (ModelState.IsValid && imgFile is not null)
         {
             //add product
+            //1
+            //var result = await _admin.AddProduct(product, imgFile);
+            //if (result)
+            //    return RedirectToAction(nameof(Index));
 
-            return RedirectToAction(nameof(Index));
+            //2
+            if (await _admin.AddProduct(product, imgFile))
+                return RedirectToAction(nameof(Index));
         }
 
 
-        ViewBag.Groups = 
+        ViewBag.Groups =
             new SelectList(await _admin.GetGroups(), "Id", "GroupName");
 
         return View(product);

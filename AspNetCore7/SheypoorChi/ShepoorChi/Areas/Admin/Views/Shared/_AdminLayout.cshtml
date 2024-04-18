@@ -4,12 +4,67 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-
+    <link href="~/css/adminstyle.css" rel="stylesheet" />
     <link href="~/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
 </head>
 <body>
+
+    <header class="bg-info">
+        <h1 class="text-white p-2">
+            <span class="fa fa-bars bg-dark rounded-3 p-1"
+                  onclick="SideBar()"></span> پنل مدریرت
+        </h1>
+
+        <ul id="sidebar" class="position-absolute bg-info pt-3 pb-3 rounded-3 side-bar">
+            <li class="list-unstyled">
+                <a>
+                    <span class="fa fa-list-ul"></span> دسته بندی ها
+                </a>
+            </li>
+            <li class="list-unstyled">
+                <a>
+                    <span class="fa fa-list-ul"></span> محصولات (آگهی ها)
+                </a>
+            </li>
+            <li class="list-unstyled">
+                <a>
+                    <span class="fa fa-shopping-cart"></span> سفارش ها
+                </a>
+            </li>
+            <li class="list-unstyled">
+                <a>
+                    <span class="fa fa-users"></span> کاربران
+                </a>
+            </li>
+            <li class="list-unstyled">
+                <a>
+                    <span class="fa fa-sign-out"></span> خروج
+                </a>
+            </li>
+        </ul>
+    </header>
+
+
     <div>
         @RenderBody()
     </div>
+
+
+    <script>
+        function SideBar() {
+            var sideBar = document.getElementById('sidebar');
+
+            console.log(sideBar.style.right);
+            if (sideBar.style.right == '10px')
+                sideBar.style.right = "-100%";
+            else
+                sideBar.style.right = "10px";
+
+
+        }
+    </script>
+
 </body>
 </html>

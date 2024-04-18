@@ -1,4 +1,4 @@
-﻿@model SheypoorChi.DataLayer.Models.Product
+﻿@model Product
 
 @{
     ViewData["Title"] = "Create";
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="GroupId" class="control-label"></label>
@@ -33,14 +33,20 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Img" class="control-label"></label>
+                @* <label asp-for="Img" class="control-label"></label> *@
                 @* <input asp-for="Img" class="form-control" /> *@
-                <input type="file" name="imgFile" asp-for="Img" class="form-control" />
+
+                <label for="inputImg" class="btn btn-outline-info">انتخاب تصویر</label>
+                <input type="file" id="inputImg" name="imgFile" asp-for="Img" class="form-control" onchange="SelectImg(this)" hidden />
                 <span asp-validation-for="Img" class="text-danger"></span>
+
+                <img id="img-view" width="250" />
+
             </div>
             <div class="form-group">
                 @{
-                    var date = DateTime.Now;
+                    // var date = DateTime.Now;
+                    var date = new DateTimeGeneration().GetPersianDate();
                 }
                 <label asp-for="SubmitDate" class="control-label"></label>
                 <input asp-for="SubmitDate" value="@date" class="form-control" readonly />
@@ -62,3 +68,16 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<script>
+    function SelectImg(input){
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                let imgTag = document.getElementById('img-view');
+                imgTag.setAttribute('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
