@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Group>
+
+<div class="horizental-groups">
+    <!-- groups -->
+    <div class="groups">
+
+        @foreach (var item in Model)
+        {
+            <a asp-controller="home"
+               asp-action="products"
+               asp-route-id="@item.Id" class="text-dark">
+                <div class="bg-group">
+                    <div>
+                        <img src="~/images/groups/@item.Img" />
+                    </div>
+                    <span>@item.GroupName</span>
+                </div>
+            </a>
+
+        }
+
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "ProductInfo";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<div class="row m-auto pt-5">
+    @* image box *@
+    <div class="col-md-5">
+        <img src="~/images/products/@Model.Img"
+             class="w-100" alt="@Model.Title" />
+
+    </div>
+
+    @* info box *@
+    <main class="col-md-7">
+        <h1>@Model.Title</h1>
+        <p>@Model.Description</p>
+        <h5>@Model.SubmitDate</h5>
+        <h4>گروه : @Model.Group.GroupName</h4>
+
+        @* product price detail *@
+        @{
+            var price = Model.Price;
+            var sellOff = Model.SellOff;
+
+            price = price * (100 - sellOff) / 100;
+            // price = price-(price*sellOff/100);
+
+            if (Model.Price > 0 && Model.Inventory > 0)
+            {
+               
+                if (Model.SellOff > 0)
+                {
+                    <h5>
+                        <del>@Model.Price.ToString("n0")</del>                                 @price.ToString("n0") تومان
+                        <span class="bg-danger text-white rounded-3 small p-1">
+                            @sellOff %
+                        </span>
+                    </h5>
+
+                }
+                else
+                {
+                    <h5>@Model.Price.ToString("n0") تومان</h5>
+                }
+
+                <h6>موجودی : @Model.Inventory</h6>
+
+                // add to shopping cart
+                <button class="btn btn-success p-0 ps-2 text-white float-start">
+                    <span class="p-3 rounded-2 bg-white text-danger fa fa-shopping-cart fa-lg"></span>
+                    اضافه سبد خرید
+                </button>
+            }
+            else if (Model.Inventory == 0)
+            {
+                <button class="btn btn-warning p-0 ps-2 float-start" disabled>
+                    <span class="p-3 rounded-2 bg-white text-danger fa fa-times fa-lg"></span>
+                   ناموجود
+                </button>
+            }
+        }
+
+
+    </main>
+</div>
+<hr />
+@* productsList (related) *@
+<partial name="partialProducts" model="@ViewBag.Related" />
+
+

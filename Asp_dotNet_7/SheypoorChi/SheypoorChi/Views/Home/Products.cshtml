@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = $"شیپورچی | {ViewBag.groupName}";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h4>آگهی های گروه : @ViewBag.groupName</h4>
+<hr />
+<partial name="partialProducts" model="Model">
+

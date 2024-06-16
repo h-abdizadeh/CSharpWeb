@@ -1,0 +1,103 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>ثبت محصول (آگهی) جدید </h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form  asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GroupId" class="control-label"></label>
+                <select asp-for="GroupId" class="form-control"
+                        asp-items="ViewBag.Groups">
+                    @*  <option value="" >text</option> *@
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+
+                <textarea asp-for="Description" class="form-control">
+                </textarea>
+
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @* <label asp-for="Img" class="control-label"></label> *@
+                @* <input asp-for="Img" class="form-control" /> *@
+
+                <label for="inputImg" class="btn btn-outline-info">انتخاب تصویر</label>
+                <input type="file" id="inputImg" name="imgFile" asp-for="Img" class="form-control" onchange="SelectImg(this)" hidden />
+                <span asp-validation-for="Img" class="text-danger"></span>
+
+                <img id="img-view" width="250" />
+
+            </div>
+
+            @* price *@
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            @* selloff *@
+            <div class="form-group">
+                <label asp-for="SellOff" class="control-label"></label>
+                <input asp-for="SellOff" class="form-control" />
+                <span asp-validation-for="SellOff" class="text-danger"></span>
+            </div>
+            @* inventory *@
+            <div class="form-group">
+                <label asp-for="Inventory" class="control-label"></label>
+                <input asp-for="Inventory" class="form-control" />
+                <span asp-validation-for="Inventory" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @{
+                    // var date = DateTime.Now;
+                    var date = new DateTimeGeneration().GetPersianDate();
+                }
+                <label asp-for="SubmitDate" class="control-label"></label>
+                <input asp-for="SubmitDate" value="@date" class="form-control" readonly />
+                <span asp-validation-for="SubmitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="NotShow" /> @Html.DisplayNameFor(model => model.NotShow)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script>
+    function SelectImg(input){
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                let imgTag = document.getElementById('img-view');
+                imgTag.setAttribute('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

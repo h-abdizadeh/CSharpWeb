@@ -1,0 +1,50 @@
+﻿<header>
+    <img class="main-logo" src="~/images/site/sheypoor-Logo.png" alt="شیپور">
+    <img class="mobile-logo" src="~/images/site/sheypoor-mini.jpg" alt="شیپور">
+
+    <!-- search -->
+    <div class="search">
+        <form asp-controller="home" asp-action="search" method="get">
+            <input type="text"
+                   name="search"
+                   value="@ViewBag.Search"
+                   placeholder="جستجو در شیپور">
+            @* <a>همه ایران <span class="fa fa-map-marker"></span></a> *@
+            <button type="submit">
+                همه ایران
+                <span class="fa fa-map-marker"></span>
+            </button>
+        </form>
+
+    </div>
+
+    <!-- menu -->
+    <div class="menu">
+
+        @{
+            if (User.Identity.IsAuthenticated)
+            {
+                <a><span class="fa fa-heart-o"></span> ذخیره ها</a>
+                <a><span class="fa fa-comment-o"></span> پیام ها</a>
+                <a asp-area="admin" asp-controller="panel">
+                    <span class="fa fa-user-o"></span> حساب من
+                </a>
+            }
+            else
+            {
+                <a asp-controller="account" asp-action="login">
+                    <span class="fa fa-sign-in"></span> ورود به حساب کاربری
+                </a>
+            }
+        }
+
+
+        <a class="btn-submit">
+            <span class="fa fa-plus"></span>
+            <span class="title">ثبت آگهی رایگان </span>
+        </a>
+    </div>
+
+
+    <!-- <hr> -->
+</header>

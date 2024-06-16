@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/mainstyle.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    @* header *@
+    <partial name="header" />
+
+    <div class="pt-68 m-auto">
+        @RenderBody()
+    </div>
+
+    @* footer *@
+    <partial name="footer" />
+
+</body>
+</html>

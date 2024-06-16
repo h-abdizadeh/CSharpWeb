@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Product>
+
+@{
+    if (Model.Count() > 0)
+    {
+        <div class="grid">
+
+            @{
+                foreach (var item in Model)
+                {
+                    <div class="grid-item">
+                        <a class="like"><span class="fa fa-heart fa-lg"></span></a>
+                        <img src="~/images/products/@item.Img" alt="@item.Title">
+                        <div class="grid-info">
+                            <h5 class="custome-line-1">@item.Title</h5>
+                            <h6 class="custome-line-1">@item.Description</h6>
+                            @{
+                                var price = item.Price;
+                                var sellOff = item.SellOff;
+
+                                price = price * (100 - sellOff) / 100;
+                                // price = price-(price*sellOff/100);
+
+                                if (item.Price > 0)
+                                {
+                                    if (item.SellOff > 0)
+                                    {
+                                        <h6>
+                                            <del>@item.Price.ToString("n0")</del>                                 @price.ToString("n0") تومان
+                                            <span 
+                                            class="bg-danger text-white rounded-3 small p-1">
+                                                @sellOff %
+                                            </span>
+                                        </h6>
+
+                                    }
+                                    else
+                                    {
+                                        <h6>@item.Price.ToString("n0") تومان</h6>
+                                    }
+
+
+                                }
+                            }
+                            <h6>@item.SubmitDate</h6>
+                        </div>
+                        @*
+        <a href="~/home/productinfo/@item.Id">جزییات آگهی</a>
+        *@
+                        <a asp-controller="home"
+                           asp-action="productinfo"
+                           asp-route-id="@item.Id">جزییات آگهی</a>
+                    </div>
+                }
+            }
+
+        </div>
+    }
+    else
+    {
+        <h4>موردی یافت نشد</h4>
+    }
+}

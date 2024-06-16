@@ -1,0 +1,42 @@
+﻿@model SheypoorChi.Core.ViewModels.RegisterVM
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h1 class="mt-5">ثبت حساب کاربری</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RePassword" class="control-label"></label>
+                <input asp-for="RePassword" class="form-control" />
+                <span asp-validation-for="RePassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group pt-3">
+                <input type="submit" value="ورود" class="btn btn-info text-white" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mb-5 mt-3">
+    <a asp-action="login">حساب کاربری دارم</a>
+</div>
+
+
+
