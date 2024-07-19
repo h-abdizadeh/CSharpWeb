@@ -11,6 +11,8 @@ public class DatabaseContext : DbContext
 {
     public DbSet<Role> Roles { get; set; }
     public DbSet<User> Users { get; set; }
+    //public DbSet<UserDetail> UserDetails { get; set; }
+    public DbSet<UserInfo> UserInfos { get; set; }
     public DbSet<Group> Groups { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Factor> Factors { get; set; }
@@ -21,7 +23,7 @@ public class DatabaseContext : DbContext
     {
         // base.OnConfiguring(optionsBuilder);
         options.UseSqlServer(@"Data Source=.\SQLEXPRESS; 
-                               Initial Catalog=SheypoorChiDb1;
+                               Initial Catalog=SheypoorChiDb2;
                                Trusted_Connection=SSPI;
                                Encrypt=false;
                                TrustServerCertificate=True");

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SheypoorChi.DataLayer.Context;
 
@@ -11,9 +12,11 @@ using SheypoorChi.DataLayer.Context;
 namespace SheypoorChi.DataLayer.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240627153049_userDetails")]
+    partial class userDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,7 +179,7 @@ namespace SheypoorChi.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("159e12c2-cda6-4f95-8bee-e66f69ea2c8f"),
+                            Id = new Guid("53c358c2-600e-4b7a-b4b2-629012ca7324"),
                             RoleName = "admin",
                             RoleTitle = "مدیر"
                         });
@@ -210,15 +213,15 @@ namespace SheypoorChi.DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7767126f-5928-4642-bbc6-45fefeb8a2c0"),
+                            Id = new Guid("553ff22c-fafe-4e5c-8807-12459b180407"),
                             IsActive = true,
-                            RoleId = new Guid("159e12c2-cda6-4f95-8bee-e66f69ea2c8f"),
+                            RoleId = new Guid("53c358c2-600e-4b7a-b4b2-629012ca7324"),
                             UserName = "09112223344",
                             UserPassword = "JfnnlDI7RTiF9RgfG2JNCw=="
                         });
                 });
 
-            modelBuilder.Entity("SheypoorChi.DataLayer.Models.UserInfo", b =>
+            modelBuilder.Entity("SheypoorChi.DataLayer.Models.UserDetail", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -249,7 +252,7 @@ namespace SheypoorChi.DataLayer.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("UserInfos");
+                    b.ToTable("UserDetails");
                 });
 
             modelBuilder.Entity("SheypoorChi.DataLayer.Models.Factor", b =>
@@ -304,11 +307,11 @@ namespace SheypoorChi.DataLayer.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("SheypoorChi.DataLayer.Models.UserInfo", b =>
+            modelBuilder.Entity("SheypoorChi.DataLayer.Models.UserDetail", b =>
                 {
                     b.HasOne("SheypoorChi.DataLayer.Models.User", "User")
-                        .WithOne("UserInfo")
-                        .HasForeignKey("SheypoorChi.DataLayer.Models.UserInfo", "UserId")
+                        .WithOne("UserDetail")
+                        .HasForeignKey("SheypoorChi.DataLayer.Models.UserDetail", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -334,7 +337,7 @@ namespace SheypoorChi.DataLayer.Migrations
                 {
                     b.Navigation("Factors");
 
-                    b.Navigation("UserInfo");
+                    b.Navigation("UserDetail");
                 });
 #pragma warning restore 612, 618
         }

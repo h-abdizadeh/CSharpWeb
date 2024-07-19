@@ -27,4 +27,7 @@ public class User
     virtual public Role? Role { get; set; }
 
     public virtual List<Factor>? Factors { get; set; }
+
+    //public virtual UserDetail? UserDetail { get; set; }
+    public virtual UserInfo? UserInfo { get; set; }
 }

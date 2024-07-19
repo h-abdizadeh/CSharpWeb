@@ -36,13 +36,9 @@ public class Factor
     public string? Description { get; set; }
 
     [Display(Name = "وضعیت")]
-    public string Status { get; set; } = new Factor().StatusArray[0];
+    public string? Status { get; set; } /*= new Factor().StatusArray[0];*/
 
-    //test
-    public string[] StatusArray { get; } =
-        { "پرداخت نشده", "پرداخت شده", "در حال آماده سازی", "ارسال شده", "بسته شده" };
-
-    //test
+    
 
 
     //(factor) n : 1 (user)
