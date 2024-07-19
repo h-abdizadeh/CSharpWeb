@@ -178,9 +178,37 @@ public class AdminService : IAdmin
     public async Task<User> GetUser(string mobile)
     {
         var user =
-            await _context.Users.FirstOrDefaultAsync(u => u.UserName == mobile);
+            await _context.Users.Include(d=>d.UserInfo).FirstOrDefaultAsync(u => u.UserName == mobile);
 
         return user;
+    }
+
+    public async Task<bool> SetUserDetail(UserInfo userDetail)
+    {
+        try
+        {
+            //var detail = await _context.UserDetails.FindAsync(userDetail.UserId);
+            var detail = await _context.UserInfos.FindAsync(userDetail.UserId);
+            if (detail is not null)
+            {
+                //update user details
+                 _context.UserInfos.Entry(userDetail).CurrentValues.SetValues(userDetail);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+
+            //add user details
+            //await _context.UserDetails.AddAsync(userDetail);
+            await _context.UserInfos.AddAsync(userDetail);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception error)
+        {
+            Console.WriteLine($"ERROR : setUserDetails {error}");
+            return false;
+        }
+        
     }
 
     private protected async Task<Guid> CheckUserRoleId()

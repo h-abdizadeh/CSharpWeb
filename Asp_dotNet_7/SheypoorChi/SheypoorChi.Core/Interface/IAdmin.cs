@@ -24,4 +24,7 @@ public interface IAdmin : IDisposable
 
     public Task<bool> AddUser(RegisterVM register);
 
+    //public Task<bool> SetUserDetail(UserDetail userDetail);
+    public Task<bool> SetUserDetail(UserInfo userDetail);
+
 }
