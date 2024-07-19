@@ -24,7 +24,8 @@
         @{
             if (User.Identity.IsAuthenticated)
             {
-                <a><span class="fa fa-heart-o"></span> ذخیره ها</a>
+                // <a><span class="fa fa-heart-o"></span> ذخیره ها</a>                
+                <a asp-controller="home" asp-action="shoppingCart" ><span class="fa fa-shopping-cart"></span> سبد خرید</a>
                 <a><span class="fa fa-comment-o"></span> پیام ها</a>
                 <a asp-area="admin" asp-controller="panel">
                     <span class="fa fa-user-o"></span> حساب من

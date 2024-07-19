@@ -1,0 +1,73 @@
+﻿@using Newtonsoft.Json
+@model UserInfo
+@{
+    ViewData["Title"] = "PreShoppingPay";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+    var cityList = (List<CitiesVM>)ViewBag.CityList;
+    var provinces = cityList.OrderBy(c => c.Province).Select(c => c.Province).Distinct();
+
+    var citiesJson = JsonConvert.SerializeObject(cityList, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+}
+
+<h1>PreShoppingPay</h1>
+<form asp-controller="Home" asp-action="PreShoppingPay">
+    <input asp-for="UserId" />
+    <div class="col-md-3 col-12 form-group">
+        <label asp-for="Fname">نام</label>
+        <input asp-for="Fname" class="form-control" />
+    </div>
+    <div class="col-md-3 col-12 form-group">
+        <label asp-for="Lname">نام خانوادگی</label>
+        <input asp-for="Lname" class="form-control" />
+    </div>
+    <select asp-for="Province" id="select-province" class="col-md-3 col-12 rounded-3 mt-2"
+            onchange="SelectProvince(this.value,'@(citiesJson)')">
+        <option selected disabled>انتخاب استان</option>
+        @foreach (var item in provinces)
+        {
+            <option value="@item">@item</option>
+        }
+    </select>
+
+    <select asp-for="City" id="select-city" class="col-md-3 col-12 rounded-3 mt-3">
+    </select>
+    <div class="col-md-6 col-12 form-group">
+        <label asp-for="Address">نشانی</label>
+        <input asp-for="Address" class="form-control" />
+    </div>
+    <div class="col-md-3 col-12 form-group">
+        <label asp-for="PostalCode">کد پستی</label>
+        <input asp-for="PostalCode" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-info text-white m-3">
+        <span class="fa fa-arrow-right"></span>
+        انتقال به درگاه پرداخت
+    </button>
+</form>
+
+<script>
+    function SelectProvince(province, json) {
+        //alert(province);
+        //console.log(json);
+        //console.log(JSON.parse(json));
+
+        let _cityList = JSON.parse(json)
+
+        _cityList = _cityList.filter(c => c.Province == province)
+
+
+        let _selectCity = document.getElementById('select-city')
+        _selectCity.innerHTML = '';
+        _cityList.forEach(item => {
+            //console.log(item.City)
+            let option = document.createElement('option');
+            option.setAttribute('value', item.City);
+            option.innerHTML = item.City;
+
+            _selectCity.appendChild(option);
+        })
+
+    }
+</script>

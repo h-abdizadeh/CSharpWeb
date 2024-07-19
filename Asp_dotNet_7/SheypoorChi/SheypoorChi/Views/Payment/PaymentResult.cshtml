@@ -1,0 +1,29 @@
+﻿@model Factor
+@{
+    ViewData["Title"] = "PaymentResult";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h1>PaymentResult</h1>
+@{
+    if (Model is null)
+    {
+        <div class="alert alert-info">
+            <h1>فاکتور مورد نظر یافت نشد</h1>
+        </div>
+    }
+    else if(Model.IsPay is true)
+    {
+        <div class="alert alert-success">
+            <h1>پرداخت شما با موفقیت انجام شد</h1>
+            <h3>شماره پیگیری : @Model.PayInfo</h3>
+        </div>
+    }
+    else if (Model.IsPay is false)
+    {
+        <div class="alert alert-danger">
+            <h1>پرداخت ناموفق</h1>
+            <h3>در صورت کسر مبلغ از حساب شما و عدم بازگشت تا حداکثر 72 ساعت به بانک خود مراجعه نمایید</h3>
+        </div>
+    }
+}

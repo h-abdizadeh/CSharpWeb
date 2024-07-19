@@ -1,0 +1,38 @@
+﻿@model Factor
+@{
+    ViewData["Title"] = "سبد خرید";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-md-8 m-auto border shadow-sm rounded-3 p-2">
+    <h1>سبد خرید شما</h1>
+    <hr />
+
+    <div class="col-12">
+        @{
+            if (Model is not null && Model.Details.Count > 0)
+            {
+                foreach (var item in Model.Details)
+                {
+                    <h6>@item.Product.Title</h6>
+                    <a>قیمت » @item.Product.Price</a>
+                    <a>تعداد سفارش » @item.DetailCount</a>
+
+                    <hr />
+                }
+
+                <div>
+                    <a asp-controller="home" asp-action="PreShoppingPay" class=" btn btn-danger">تکمیل فرایند خرید</a>
+                </div>
+            }
+            else
+            {
+                <h4 class="alert alert-info ">سبد خرید شما خالی است</h4>
+                <h4 class="alert alert-info ">همین حالا خرید کنید</h4>
+            }
+
+        }
+    </div>
+
+</div>
+

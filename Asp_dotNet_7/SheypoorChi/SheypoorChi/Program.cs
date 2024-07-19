@@ -8,6 +8,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 builder.Services.AddScoped<DatabaseContext, DatabaseContext>();
 builder.Services.AddScoped<IAdmin, AdminService>();
+builder.Services.AddScoped<IShopping, ShoppingService>();
 
 const string scheme = "sheypoorchi";
 builder.Services.AddAuthentication().AddCookie(scheme, option =>
