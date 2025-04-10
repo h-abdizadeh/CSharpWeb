@@ -1,0 +1,24 @@
+﻿@model Login
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="p-5"></div>
+<form asp-controller="account" asp-action="login" class="col-md-5 col-12 m-auto">
+    <h1>ورود</h1>
+    <hr />
+    <div class="col-10 form-group">
+        <label asp-for="Mobile" class="control-label"></label>
+        <input asp-for="Mobile" class="form-control" />
+        <span asp-validation-for="Mobile" class="text-danger"></span>
+    </div>
+    <div class="col-10 form-group">
+        <label asp-for="Password" class="control-label"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary col-10 mt-3 fs-3">ورود</button>
+</form>
+

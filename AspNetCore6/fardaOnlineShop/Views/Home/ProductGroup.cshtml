@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "ProductGroup";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+    var groupName = Model.First().Group.Title;
+}
+
+<div class="p-5"></div>
+<h3>محصولات گروه @groupName</h3>
+<hr />
+<partial name="_products" model="@Model" />
+
+

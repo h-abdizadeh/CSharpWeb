@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="p-5"></div>
+<h5>نتایج جستجوی <b><i>@ViewBag.Search</i></b></h5>
+<div class="col-md-10 col-12 m-auto ">
+    @{
+        if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <div class="col-md-4 col-12 p-1">
+                    <div class="col-12 bg-white rounded-3 row m-auto">
+                        <img src="~/img/products/@item.Img" class="col-5 p-0 rounded-3">
+
+                        <div class="col-7 p-1">
+                            <h5>
+                                <a asp-action="productInfo"
+                                   asp-route-id="@item.Id">@item.Name</a>
+                            </h5>
+                            <h6>@item.Price</h6>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h1>موردی یافت نشد</h1>
+        }
+    }
+</div>
+

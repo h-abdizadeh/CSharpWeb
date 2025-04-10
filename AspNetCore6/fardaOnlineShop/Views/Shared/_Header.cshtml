@@ -1,0 +1,73 @@
+﻿  <!-- nav bar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom border-3 border-primary position-fixed w-100 z-10">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="~/img/site/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            فروشگاه آنلاین
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item border-end border-2">
+                    <a class="nav-link active text-primary" aria-current="page" href="#">
+                        <span class="bi bi-house-fill"></span>
+                        خانه
+                    </a>
+                </li>
+                <li class="nav-item border-end border-2 me-1">
+                    <a class="nav-link text-primary" href="#">
+                        <span class="bi bi-telephone-fill"></span>
+                        ارتباط با ما
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle bg-primary text-white rounded-2" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="bi bi-columns-gap"></span>
+                        دسته بندی ها
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">گروه اول</a></li>
+                        <li><a class="dropdown-item" href="#">گروه دوم</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">تمامی دسته بندی ها</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item border-end border-2">
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="profile"
+                                asp-action="index"
+                                class="nav-link text-primary">
+                                <span class="bi bi-person-fill"></span>
+                                @User.Identity.Name
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="account"
+                               asp-action="login"
+                               class="nav-link text-primary">
+                           <span class="bi bi-box-arrow-in-right"></span>
+                                ورود به حساب کاربری
+                            </a>
+                        }
+                    }
+                </li>
+            </ul>
+            @*search*@
+            <form asp-controller="home" asp-action="search" 
+                  class="d-flex position-relative" role="search">
+                <input name="search" class="form-control me-2" type="search" placeholder="جستجو..." aria-label="Search">
+                <button class="btn btn-outline-success bi bi-search position-absolute border-0 search-btn"
+                        type="submit"></button>
+            </form>
+        </div>
+    </div>
+</nav>

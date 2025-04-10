@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<br />
+@*slider*@
+<partial name="_slider" />
+
+<h1 class="text-center pt-4 pb-4" id="welcome-text"></h1>
+
+@*product list*@
+<partial name="_products" model="Model" />
+
+
+<script>
+    let myText = 'به فروشگاه آنلاین خوش آمدید'
+    let h1 = document.getElementById('welcome-text')
+    let i = 0;
+    var timer = window.setInterval(() => {
+
+        h1.innerHTML += myText[i]
+        i++
+        if (i == myText.length) {
+            clearInterval(timer)
+        }
+
+    }, 150)
+</script>

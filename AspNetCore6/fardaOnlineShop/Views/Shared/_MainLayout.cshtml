@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html dir="rtl">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/MainStyle.css" rel="stylesheet" />
+    <link href="~/bootstrap/css/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="~/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
+</head>
+<body>
+    @*header*@
+    <partial name="_header" />
+    <div>
+        @RenderBody()
+    </div>
+
+    @*footer*@
+    <partial name="_footer" />
+</body>
+<script src="~/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
+</html>

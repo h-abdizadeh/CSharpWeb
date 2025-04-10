@@ -1,0 +1,61 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "ProductInfo";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+    var price = Model.Price;
+    var sellOff = Model.SellOff;
+    var finalPrice = price * (100 - sellOff) / 100;
+}
+
+<div class="p-5"></div>
+<div class="col-md-10 col-12 m-auto p-2 bg-whitesmoke row">
+    @*image box*@
+    <div class="col-md-5 col-sm-6 col-12">
+        <img src="~/img/products/@Model.Img" class="w-100 rounded-3" />
+    </div>
+
+    @*info box*@
+    <div class="col-md-7 col-sm-6 col-12">
+        <h1>@Model.Name</h1>
+        <h6>
+            گروه :
+            <a asp-controller="home"
+               asp-action="productGroup"
+               asp-route-id="@Model.GroupId"
+               asp-route-name="@Model.Group.Title.Replace(" ","-")">
+                @Model.Group.Title
+            </a>
+        </h6>
+        <h4>@Model.Description</h4>
+
+        @{
+            if (sellOff > 0)
+            {
+                <h4>
+                    <del class="text-black-50">@price</del>
+                    <span class="p-1 fs-6 rounded-5 bg-danger text-white">@sellOff %</span>
+                </h4>
+            }
+            <h3>@finalPrice تومان</h3>
+
+        }
+
+    </div>
+</div>
+
+@*related products*@
+<h3 class="pt-5">محصولات مرتبط</h3>
+<hr />
+@{
+    var products = (List<Product>)ViewBag.Related;
+
+    if (products.Count() > 0)
+    {
+        <partial name="_products" model="@ViewBag.Related" />
+    }
+    else
+    {
+        <div class="alert alert-info">موردی یافت نشد</div>
+    }
+}

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Product>
+
+@{
+    if (Model is not null)
+    {
+        //Product list view
+        <div class="col-12">
+            <!-- main box -->
+            <div class="col-md-10 col-12 row m-auto">
+                @foreach (var item in Model)
+                {
+                    <!-- inner box -->
+                    <div class="col-md-3 col-sm-4 col-12 p-2">
+                        <!-- product box -->
+                        <div class="col-12 row m-auto border rounded-3 overflow-hidden shadow-sm">
+                            <div class="col-md-12 col-sm-12 col-4 p-0">
+                                <img src="~/img/products/@item.Img" class="w-100" alt="محصول">
+                            </div>
+                            <!-- ------------------------------------------ -->
+                            <div class="col-md-12 col-sm-12 col-8 p-2">
+                                <h5>@item.Name</h5>
+                                <h6 class="text-black-50 persian-number"><del>@item.Price.ToString("n0") تومان</del></h6>
+                                <h5 class="persian-number">
+                                    <span class="bg-danger rounded-2 p-1  font-s9 text-white float-start me-2">@item.SellOff %</span>@item.Price.ToString("n0") تومان
+                                </h5>
+                                <a asp-controller="home" asp-action="productinfo" asp-route-id="@item.Id" class="d-md-inline-block d-sm-inline-block d-none float-end text-decoration-none text-danger">جزییات</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <h3>موردی برای نمایش وجود ندارد</h3>
+        </div>
+    }
+}
